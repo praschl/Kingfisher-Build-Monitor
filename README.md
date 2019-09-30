@@ -9,7 +9,7 @@ The builds can be sorted and filtered, and you can open builds on the TFS's web 
 So, you have your TFS running with a some Team Projects on it. IMHO it's very cumbersome to monitor the builds and releases of all Team Projects in once place, since the web ui of TFS will only show one Team Project.
 
 ## What does it look like?
-![Overview](assets/screenshot.png)
+![Overview](Assets/screenshot.png)
 
 Translations for english and german are available.
 
