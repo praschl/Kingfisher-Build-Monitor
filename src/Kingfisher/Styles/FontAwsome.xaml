@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <FontFamily x:Key="FontFamily.FontAwsome">pack://application:,,,/Fonts/fa-solid-900.ttf #Font Awesome 5 Free Solid</FontFamily>
+
+    <Style x:Key="FontAwsome" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/fa-solid-900.ttf #Font Awesome 5 Free Solid" />
+    </Style>
+
+    <system:String x:Key="FontAwsome-Icon-Ban">&#xf05e;</system:String>
+    <system:String x:Key="FontAwsome-Icon-CalendarAlt">&#xf073;</system:String>
+    <system:String x:Key="FontAwsome-Icon-Check">&#xf00c;</system:String>
+    <system:String x:Key="FontAwsome-Icon-EllipsisH">&#xf141;</system:String>
+    <system:String x:Key="FontAwsome-Icon-ExclamationTriangle">&#xf071;</system:String>
+    <system:String x:Key="FontAwsome-Icon-Play">&#xf04b;</system:String>
+    <system:String x:Key="FontAwsome-Icon-QuestionCircle">&#xf059;</system:String>
+    <system:String x:Key="FontAwsome-Icon-SortAlphaDown">&#xf15d;</system:String>
+    <system:String x:Key="FontAwsome-Icon-SortAlphaUp">&#xf15e;</system:String>
+    <system:String x:Key="FontAwsome-Icon-SortAmountDown">&#xf160;</system:String>
+    <system:String x:Key="FontAwsome-Icon-SortAmountUp">&#xf161;</system:String>
+    <system:String x:Key="FontAwsome-Icon-Times">&#xf00d;</system:String>
+
+    <system:String x:Key="FontAwsome-Icon-Folder">&#xf07b;</system:String>
+    <system:String x:Key="FontAwsome-Icon-FolderOpen">&#xf07c;</system:String>
+
+    <system:String x:Key="FontAwsome-Icon-Globe">&#xf0ac;</system:String>
+    <system:String x:Key="FontAwsome-Icon-Spinner">&#xf110;</system:String>
+    <system:String x:Key="FontAwsome-Icon-Cog">&#xf013;</system:String>
+    <system:String x:Key="FontAwsome-Icon-Copy">&#xf0c5;</system:String>
+
+    <system:String x:Key="FontAwsome-Icon-Maximize">&#xf2d0;</system:String>
+    <system:String x:Key="FontAwsome-Icon-Minimize">&#xf2d1;</system:String>
+
+    <Style x:Key="State-NotStarted" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-EllipsisH}" />
+    </Style>
+    <Style x:Key="State-Postponed" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-CalendarAlt}" />
+    </Style>
+    <Style x:Key="State-InProgress" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-Play}" />
+    </Style>
+    <Style x:Key="State-Cancelling" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-Ban}" />
+    </Style>
+
+    <Style x:Key="State-Canceled" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Orange}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-Ban}" />
+    </Style>
+    <Style x:Key="State-Succeeded" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Green}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-Check}" />
+    </Style>
+    <Style x:Key="State-PartiallySucceeded" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Orange}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-ExclamationTriangle}" />
+    </Style>
+    <Style x:Key="State-Failed" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Red}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-Times}" />
+    </Style>
+    <Style x:Key="State-Unknown" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Magenta}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-QuestionCircle}" />
+    </Style>
+
+    <Style x:Key="Icon-Spinner" TargetType="TextBlock" BasedOn="{StaticResource FontAwsome}">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Text" Value="{StaticResource FontAwsome-Icon-Spinner}" />
+    </Style>
+
+</ResourceDictionary>

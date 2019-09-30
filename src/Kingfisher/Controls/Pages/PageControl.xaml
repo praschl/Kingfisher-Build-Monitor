@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Kingfisher.Controls.Pages.PageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ioC="clr-namespace:Kingfisher.IoC"
+             xmlns:p="clr-namespace:Kingfisher.Controls.Pages"
+             mc:Ignorable="d"
+             d:DesignHeight="200"
+             d:DesignWidth="300"
+             DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=PageViewModel}">
+
+    <UserControl.Resources>
+        <p:PageConverter x:Key="PageConverter"
+                             BuildsControl="{ioC:Resolve ServiceType=Control, Name='Builds'}"
+                             ConfigurationControl="{ioC:Resolve ServiceType=Control, Name='Configuration'}" />
+    </UserControl.Resources>
+
+    <ContentControl
+        Content="{Binding CurrentPage, Converter={StaticResource PageConverter}}" />
+</UserControl>

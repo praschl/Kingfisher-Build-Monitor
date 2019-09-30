@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingfisher", "Kingfisher\Kingfisher.csproj", "{38AFB994-1C15-4B1C-9967-92EB2178325A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingfisher.Provider", "Kingfisher.Provider\Kingfisher.Provider.csproj", "{05561D0B-99EC-4F81-8B8E-E4FA63902598}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{371D660B-791F-43CB-9681-93F146907765}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Kingfisher.svg = Assets\Kingfisher.svg
+		Assets\Kingfisher_alone.svg = Assets\Kingfisher_alone.svg
+		Assets\Kingfisher_alone.xaml = Assets\Kingfisher_alone.xaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38AFB994-1C15-4B1C-9967-92EB2178325A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38AFB994-1C15-4B1C-9967-92EB2178325A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38AFB994-1C15-4B1C-9967-92EB2178325A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38AFB994-1C15-4B1C-9967-92EB2178325A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05561D0B-99EC-4F81-8B8E-E4FA63902598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05561D0B-99EC-4F81-8B8E-E4FA63902598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05561D0B-99EC-4F81-8B8E-E4FA63902598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05561D0B-99EC-4F81-8B8E-E4FA63902598}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A453E3A-90B5-479F-AD0D-A8B76B2CF726}
+	EndGlobalSection
+EndGlobal

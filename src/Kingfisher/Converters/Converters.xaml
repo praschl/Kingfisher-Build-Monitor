@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Kingfisher.Converters">
+
+    <local:BuildStateToStyleConverter x:Key="Converter-BuildStateToStyle"
+
+                                      NotStarted="{StaticResource State-NotStarted}"
+                                      PostPoned="{StaticResource State-Postponed}"
+                                      InProgress="{StaticResource State-InProgress}"
+                                      Cancelling="{StaticResource State-Cancelling}"
+
+                                      Canceled="{StaticResource State-Canceled}"
+                                      Succeeded="{StaticResource State-Succeeded}"
+                                      PartiallySucceeded="{StaticResource State-PartiallySucceeded}"
+                                      Failed="{StaticResource State-Failed}" />
+
+    <local:ReadableConverter x:Key="Converter-Readable" />
+    <local:SortableConverter x:Key="Converter-Sortable" />
+
+    <local:BuildStateToTextConverter x:Key="Converter-ToText-BuildState" />
+</ResourceDictionary>

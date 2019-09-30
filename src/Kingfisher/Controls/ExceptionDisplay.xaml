@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Kingfisher.Controls.ExceptionDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Kingfisher.Controls"
+             xmlns:cv="clr-namespace:Kingfisher.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="40" d:DesignWidth="400">
+
+    <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ExceptionDisplay}}">
+        <Border BorderThickness="1"
+                BorderBrush="{StaticResource Brush-Red}"
+                Background="{StaticResource Brush-Red-Very-Bright}"
+                Margin="4 4 4 0"
+                Visibility="{Binding Exception, Converter={cv:IfEqual Test={x:Null}, Then={x:Static Visibility.Collapsed}, Else={x:Static Visibility.Visible}}}" Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           TextWrapping="Wrap" 
+                           Foreground="{StaticResource Brush-Red}" 
+                           FontWeight="Bold" 
+                           VerticalAlignment="Center"
+                           Padding="4"
+                           Text="{Binding Exception.Message}" />
+                
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center">
+                    
+                    <Button Style="{StaticResource Button-Copy}"
+                            Click="CopyButton_OnClick" />
+                    
+                    <Button Style="{StaticResource Button-Close}"
+                            Click="CloseButton_OnClick" />
+
+                </StackPanel>
+                
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,185 @@
+﻿<UserControl x:Class="Kingfisher.Controls.BuildsOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Kingfisher.Controls"
+             xmlns:vm="clr-namespace:Kingfisher.ViewModels"
+             xmlns:cm="clr-namespace:Kingfisher.Commands"
+             xmlns:ioC="clr-namespace:Kingfisher.IoC"
+             xmlns:mx="clr-namespace:Kingfisher.MarkupExtensions"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <cm:OpenUrlCommand x:Key="OpenUrlCommand" />
+        <ioC:Resolve x:Key="OpenDropFolderCommand" ServiceType="cm:OpenDropFolderCommand" />
+    </UserControl.Resources>
+
+    <!-- 
+    Problem (now solved)
+    When I explicitly bind my DataContext to a dependency property,
+    the binding silently doesnt succeed, resulting in the items not being displayed,
+    even though it works with the d:DataContext, so the binding for the datagrid must be correct.
+    
+    // here is a solution that sounded promising, but didnt work: 
+    // https://www.nikolalukovic.com/programming/wpf-custom-usercontrol-datacontext-binding-gotcha
+    
+    // and here is the same solution as above, just with better explanation, which made me try again.
+    // https://blog.scottlogic.com/2012/02/06/a-simple-pattern-for-creating-re-useable-usercontrols-in-wpf-silverlight.html
+    // It works. The solution which I didn't see important in the first link is, that the relative binding must be declared
+    // on an element IN the usercontrol, not ON the usercontrol.
+    
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+    d:DataContext="{x:Static viewModels:CachedBuildsViewModel.Designer}"
+    -->
+
+    <Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:BuildsOverview}}"
+          d:DataContext="{x:Static vm:BuildsOverviewViewModel+Designer.Instance}">
+
+        <DataGrid ItemsSource="{Binding Builds}"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  AutoGenerateColumns="False"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow"
+                  HorizontalGridLinesBrush="{StaticResource Brush-Horizontal-Gridlines}"
+                  HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  IsSynchronizedWithCurrentItem="True"
+                  RowHeaderWidth="0">
+
+            <DataGrid.Resources>
+                <Style x:Key="Grid.TextBlock" TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="TextWrapping" Value="NoWrap" />
+                    <Setter Property="Padding" Value="2 1" />
+                </Style>
+
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                </Style>
+
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Brush-Blue-Very-Bright}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <!-- Project -->
+                <DataGridTemplateColumn Header="{mx:Translate Type=local:BuildOverviewResources, Key=Project }"
+                                        Width="*"
+                                        CanUserSort="True"
+                                        SortMemberPath="Project"
+                                        ClipboardContentBinding="{Binding Project}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="vm:BuildViewModel">
+                            <TextBlock Text="{Binding Project}" Style="{StaticResource Grid.TextBlock}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Definition -->
+                <DataGridTemplateColumn Header="{mx:Translate Type=local:BuildOverviewResources, Key=Definition}"
+                                        Width="*"
+                                        CanUserSort="True"
+                                        SortMemberPath="Definition"
+                                        ClipboardContentBinding="{Binding Definition}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="vm:BuildViewModel">
+                            <TextBlock Text="{Binding Definition}" Style="{StaticResource Grid.TextBlock}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Status -->
+                <DataGridTemplateColumn Width="40"
+                                        CanUserSort="True"
+                                        SortMemberPath="Status"
+                                        ClipboardContentBinding="{Binding Status, Converter={StaticResource Converter-ToText-BuildState}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="vm:BuildViewModel">
+                            <TextBlock Style="{Binding Status, Converter={StaticResource Converter-BuildStateToStyle}}"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Padding="1"
+                                       ToolTip="{Binding Status, Converter={StaticResource Converter-ToText-BuildState}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Requested for -->
+                <DataGridTemplateColumn Header="{mx:Translate Type=local:BuildOverviewResources, Key=Requested_For}"
+                                        Width="*"
+                                        CanUserSort="True"
+                                        SortMemberPath="RequestedFor"
+                                        ClipboardContentBinding="{Binding RequestedFor}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="vm:BuildViewModel">
+                            <TextBlock Text="{Binding RequestedFor}"
+                                       ToolTip="{Binding RequestedBy}"
+                                       Style="{StaticResource Grid.TextBlock}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Changed at -->
+                <DataGridTemplateColumn Header="{mx:Translate Type=local:BuildOverviewResources, Key=Changed_At}"
+                                        CanUserSort="True"
+                                        SortMemberPath="ChangedAt"
+                                        ClipboardContentBinding="{Binding ChangedAt}"
+                                        SortDirection="Descending">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="vm:BuildViewModel">
+                            <TextBlock Text="{Binding ChangedAt, Converter={StaticResource Converter-Readable}}"
+                                       ToolTip="{Binding ChangedAt, Converter={StaticResource Converter-Sortable}}"
+                                       TextAlignment="Right"
+                                       Style="{StaticResource Grid.TextBlock}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Duration -->
+                <DataGridTemplateColumn Header="{mx:Translate Type=local:BuildOverviewResources, Key=Duration}"
+                                        CanUserSort="True"
+                                        SortMemberPath="Duration"
+                                        ClipboardContentBinding="{Binding Duration}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="vm:BuildViewModel">
+                            <TextBlock Text="{Binding Duration, Converter={StaticResource Converter-Readable}}"
+                                       ToolTip="{Binding Duration, Converter={StaticResource Converter-Sortable}}"
+                                       TextAlignment="Right"
+                                       Style="{StaticResource Grid.TextBlock}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="vm:BuildViewModel">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource Button-Browse-Build}"
+                                        ToolTip="{mx:Translate Type=local:BuildOverviewResources, Key=Open_Build_In_Browser}"
+                                        Command="{StaticResource OpenUrlCommand}"
+                                        CommandParameter="{Binding WebUrl}" />
+                                <Button Style="{StaticResource Button-Folder}"
+                                        ToolTip="{mx:Translate Type=local:BuildOverviewResources, Key=Open_Drop_Folder}"
+                                        Command="{StaticResource OpenDropFolderCommand}"
+                                        CommandParameter="{Binding}" />
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

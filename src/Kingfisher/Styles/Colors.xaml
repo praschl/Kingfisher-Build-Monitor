@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mx="clr-namespace:Kingfisher.MarkupExtensions">
+
+    <Color x:Key="Color-White-VeryTrans">#44FFFFFF</Color>
+    <Color x:Key="Color-Red">#DC143C</Color>
+    <Color x:Key="Color-Orange">#FFA500</Color>
+    <Color x:Key="Color-Green">#32CD32</Color>
+    <Color x:Key="Color-Blue">#1872c9</Color>
+    <Color x:Key="Color-Magenta">#BE34BE</Color>
+
+    <Color x:Key="Color-Window-BorderShadow">#000</Color>
+
+    <SolidColorBrush x:Key="Brush-Blue" Color="{StaticResource Color-Blue}" />
+    <SolidColorBrush x:Key="Brush-Blue-Bright" Color="{mx:Brightness Color={StaticResource Color-Blue}, Amount=0.4}" />
+    <SolidColorBrush x:Key="Brush-Blue-Very-Bright"
+                     Color="{mx:Brightness Color={StaticResource Color-Blue}, Amount=0.85}" />
+    <SolidColorBrush x:Key="Brush-Green" Color="{StaticResource Color-Green}" />
+    <SolidColorBrush x:Key="Brush-Orange" Color="{StaticResource Color-Orange}" />
+    <SolidColorBrush x:Key="Brush-Red" Color="{StaticResource Color-Red}" />
+    <SolidColorBrush x:Key="Brush-Red-Very-Bright"
+                     Color="{mx:Brightness Color={StaticResource Color-Red}, Amount=0.85}" />
+    <SolidColorBrush x:Key="Brush-Magenta" Color="{StaticResource Color-Magenta}" />
+
+    <SolidColorBrush x:Key="Brush-Horizontal-Gridlines" Color="#CCCCCC" />
+
+</ResourceDictionary>
