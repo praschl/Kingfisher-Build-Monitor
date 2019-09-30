@@ -7,13 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingfisher", "Kingfisher\Ki
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingfisher.Provider", "Kingfisher.Provider\Kingfisher.Provider.csproj", "{05561D0B-99EC-4F81-8B8E-E4FA63902598}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{371D660B-791F-43CB-9681-93F146907765}"
-	ProjectSection(SolutionItems) = preProject
-		Assets\Kingfisher.svg = Assets\Kingfisher.svg
-		Assets\Kingfisher_alone.svg = Assets\Kingfisher_alone.svg
-		Assets\Kingfisher_alone.xaml = Assets\Kingfisher_alone.xaml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
