@@ -14,7 +14,7 @@ So, you have your TFS running with a some Team Projects on it. IMHO it's very cu
 Translations for english and german are available.
 
 ## Where does the name come from?
-The Kingfisher ("Eisvogel" in german) is a beautiful bird that lives at rivers and catches fish. It's orange and azure, and I needed a name that's somehow related to Azure DevOps :-)
+The Kingfisher ("Eisvogel" in german) is a beautiful bird that lives at rivers and catches fish. It's orange and azure, so it's related to Azure DevOps :-)
 
 # Technical stuff
 This is a rewrite of https://github.com/praschl/TeamBuildMonitor which used the WCF api of TFS. The new REST api is much more
