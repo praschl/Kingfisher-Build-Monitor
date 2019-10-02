@@ -9,6 +9,7 @@
         xmlns:cm="clr-namespace:Kingfisher.Commands"
         xmlns:wpfVm="clr-namespace:Kingfisher.WpfViewModels"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Title="Kingfisher Devops Monitor"
         Width="600"
@@ -24,6 +25,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}, Path=WindowViewModel}"
         MinWidth="200"
         MinHeight="100"
+        Topmost="{Binding TopMost}"
         d:DataContext="{x:Static wpfVm:MainWindowViewModel+Designer.Instance}">
 
     <WindowChrome.WindowChrome>
@@ -82,26 +84,29 @@
                                                Opacity="0.75" />
 
                                     <Button Style="{StaticResource Window-Button-Red}"
-                                            Content="{StaticResource FontAwsome-Icon-Times}"
                                             DockPanel.Dock="Right"
                                             WindowChrome.IsHitTestVisibleInChrome="True"
                                             Command="{cm:WindowCommand Command=Close}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                                        <fa5:SvgAwesome Icon="Solid_Times" Foreground="White" Height="14" />
+                                    </Button>
 
                                     <Button Style="{StaticResource Window-Button}"
-                                            Content="{StaticResource FontAwsome-Icon-Maximize}"
                                             DockPanel.Dock="Right"
                                             WindowChrome.IsHitTestVisibleInChrome="True"
                                             Command="{cm:WindowCommand Command=Maximize}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                                        <fa5:SvgAwesome Icon="Solid_WindowMaximize" Foreground="White" Height="14" />
+                                    </Button>
 
                                     <Button Style="{StaticResource Window-Button}"
                                             VerticalContentAlignment="Bottom"
-                                            Content="{StaticResource FontAwsome-Icon-Minimize}"
                                             DockPanel.Dock="Right"
                                             WindowChrome.IsHitTestVisibleInChrome="True"
                                             Command="{cm:WindowCommand Command=Minimize}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                                        <fa5:SvgAwesome Icon="Solid_WindowMinimize" Foreground="White" Height="14" />
+                                    </Button>
                                 </DockPanel>
                             </Grid>
 

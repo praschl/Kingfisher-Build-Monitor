@@ -56,7 +56,6 @@ namespace Kingfisher.ViewModels
 
         public TimeSpan SelectedBuildAge { get; set; } = TimeSpan.FromDays(3);
 
-
         public virtual async void OnDevOpsServerUrlChanged()
         {
             var uri = DevOpsServerUrl;
@@ -101,6 +100,7 @@ namespace Kingfisher.ViewModels
             {
                 DevOpsServerUrl = "http://my-tfs-url:8080/tfs/DefaultCollection";
                 DevOpsServerUrlIsValid = true;
+                IsInUrlTestMode = false;
             }
 
             // Using a lambda-get this instance won't be created at runtime.

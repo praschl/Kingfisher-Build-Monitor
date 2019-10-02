@@ -13,6 +13,7 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:ap="clr-namespace:Kingfisher.AttachedProperties"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
              d:DesignWidth="600"
              d:DesignHeight="400"
              DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Model}"
@@ -36,7 +37,7 @@
                                        Watermark="Search..."
                                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=200}"
                                        VerticalContentAlignment="Center"
-                                       Margin="5"
+                                       Margin="4"
                                        Padding="2"
                                        BorderBrush="Gray"
                                        ap:Focus.Key="F3" />
@@ -50,13 +51,10 @@
             <c:BuildsOverview Builds="{Binding BuildsCollectionView}" Margin="4" />
 
             <!-- Loading Spinner -->
-            <Grid Background="#88FFFFFF"
+            <Grid Background="#88FFFFFF" 
                   Visibility="{Binding DisplaySpinner, Converter={cv:IfEqual Test={StaticResource True}, Then={x:Static Visibility.Visible}, Else={x:Static Visibility.Collapsed}}}">
-                <TextBlock FontSize="48"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           Style="{StaticResource Icon-Spinner}"
-                           ap:SpinAnimation.Speed="1" />
+                
+                <fa5:SvgAwesome Icon="Solid_Spinner" Height="100" Foreground="{StaticResource Brush-Blue}" ap:SpinAnimation.Speed="1"  />
             </Grid>
 
         </Grid>

@@ -12,16 +12,14 @@
              xmlns:ap="clr-namespace:Kingfisher.AttachedProperties"
              xmlns:mx="clr-namespace:Kingfisher.MarkupExtensions"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:fa5Enum="clr-namespace:FontAwesome5;assembly=FontAwesome5"
              mc:Ignorable="d"
              FontSize="14"
              d:DesignWidth="800"
              d:DesignHeight="450"
              DataContext="{ioC:Resolve ServiceType=vm:ConfigurationViewModel}"
              d:DataContext="{x:Static vm:ConfigurationViewModel+Designer.Instance}">
-
-    <UserControl.Resources>
-        <system:Boolean x:Key="True">True</system:Boolean>
-    </UserControl.Resources>
 
     <Grid>
         <StackPanel Orientation="Vertical" Width="auto">
@@ -38,25 +36,54 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <xctk:WatermarkTextBox x:Name="ServerUrl" 
+                <xctk:WatermarkTextBox x:Name="ServerUrl"
                                        Grid.Column="0"
                                        Padding="2"
                                        Watermark="http://your-tfs:8080/tfs/DefaultCollection"
                                        Text="{Binding DevOpsServerUrl, UpdateSourceTrigger=PropertyChanged, Delay=300}" />
-                <TextBlock Grid.Column="1" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
-                           Margin="4 0 0 0" FontSize="16"
-                           VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Style="{Binding DevOpsServerUrlIsValid, 
-                                Converter={cv:IfEqual Test={StaticResource True}, Then={StaticResource State-Succeeded}, Else={StaticResource State-Failed}}}"
-                           Visibility="{Binding IsInUrlTestMode, Converter={cv:IfEqual Test={StaticResource True}, Then={x:Static Visibility.Hidden}, Else={x:Static Visibility.Visible}}}" />
+                
+                <!-- TIL: FontAwsome5 sets visibility and so overrides the visibility set in a style.
+                          Instead of setting Visibility to hidden or collapsed, set Icon = None! -->
+                
+                <!-- Valid display: green check or red X -->
+                <fa5:SvgAwesome Grid.Column="1"
+                                Height="16"
+                                Margin="4 0 0 0">
+                    <fa5:SvgAwesome.Style>
+                        <Style TargetType="fa5:SvgAwesome">
+                            <Setter Property="Icon" Value="Solid_Check" />
+                            <Setter Property="Foreground" Value="{StaticResource Brush-Green}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding DevOpsServerUrlIsValid}" Value="false">
+                                    <Setter Property="Icon" Value="Solid_Times" />
+                                    <Setter Property="Foreground" Value="{StaticResource Brush-Red}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsInUrlTestMode}" Value="true">
+                                    <Setter Property="Icon" Value="None" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </fa5:SvgAwesome.Style>
+                </fa5:SvgAwesome>
 
-                <TextBlock Grid.Column="1" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
-                           Margin="4 0 0 0" FontSize="16"
-                           VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Style="{StaticResource Icon-Spinner}"
-                           Visibility="{Binding IsInUrlTestMode, Converter={cv:IfEqual Test={StaticResource True}, Then={x:Static Visibility.Visible}, Else={x:Static Visibility.Hidden}}}"
-                           RenderTransformOrigin="0.45 0.5"
-                           ap:SpinAnimation.Speed="2" />
+                <!-- display a spinner when testing url -->
+                <fa5:SvgAwesome Grid.Column="1"
+                                Height="16"
+                                Margin="4 0 0 0"
+                                Foreground="{StaticResource Brush-Blue}"
+                                ap:SpinAnimation.Speed="2"
+                                >
+                    <fa5:SvgAwesome.Style>
+                        <Style TargetType="fa5:SvgAwesome">
+                            <Setter Property="Icon" Value="None" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsInUrlTestMode}" Value="true">
+                                    <Setter Property="Icon" Value="Solid_Spinner" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </fa5:SvgAwesome.Style>
+                </fa5:SvgAwesome>
             </Grid>
 
             <!-- Refresh time -->
@@ -126,14 +153,16 @@
                         Content="{mx:Translate Type=local:ConfigResources, Key=Apply}"
                         Command="{ioC:Resolve ServiceType=cm:CloseSettingsCommand}"
                         CommandParameter="OK"
-                        ap:ButtonImage.ImageStyle="{StaticResource State-Succeeded}"
+                        ap:ButtonImage.Icon="Solid_Check"
+                        ap:ButtonImage.IconBrush="{StaticResource Brush-Green}"
                         Style="{StaticResource Button-Text-Image}" />
 
                 <Button Grid.Column="2"
                         Content="{mx:Translate Type=local:ConfigResources, Key=Cancel}"
                         Command="{ioC:Resolve ServiceType=cm:CloseSettingsCommand}"
                         CommandParameter="CANCEL"
-                        ap:ButtonImage.ImageStyle="{StaticResource State-Failed}"
+                        ap:ButtonImage.Icon="Solid_Times"
+                        ap:ButtonImage.IconBrush="{StaticResource Brush-Red}"
                         Style="{StaticResource Button-Text-Image}" />
             </Grid>
         </StackPanel>

@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:attachedProperties="clr-namespace:Kingfisher.AttachedProperties">
+                    xmlns:attachedProperties="clr-namespace:Kingfisher.AttachedProperties"
+                    xmlns:fa5="clr-namespace:FontAwesome5;assembly=FontAwesome5.NetCore30">
 
     <Style x:Key="Button-Image" TargetType="Button">
-        <Setter Property="FontFamily" Value="{StaticResource FontFamily.FontAwsome}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
@@ -13,7 +13,6 @@
     </Style>
 
     <Style x:Key="Button-Sizing" TargetType="Button">
-        <Setter Property="FontFamily" Value="{StaticResource FontFamily.FontAwsome}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Template">
@@ -71,47 +70,73 @@
         </Setter>
     </Style>
 
-    <Style x:Key="Button-Folder" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
-        <Setter Property="Content" Value="{StaticResource FontAwsome-Icon-Folder}" />
-        <Setter Property="Foreground" Value="{StaticResource Brush-Orange}" />
+    <Style x:Key="Button-Folder" x:Shared="False" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
+        <Setter Property="Content">
+            <Setter.Value>
+                <fa5:SvgAwesome Icon="Solid_Folder" 
+                                Foreground="{StaticResource Brush-Orange}"
+                                Height="16"/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Margin" Value="2 1 8 1" />
-        <Setter Property="FontSize" Value="16" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Content" Value="{StaticResource FontAwsome-Icon-FolderOpen}" />
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <fa5:SvgAwesome Icon="Solid_FolderOpen" 
+                                        Foreground="{StaticResource Brush-Orange}"
+                                        Height="16"/>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="Button-Browse-Build" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
-        <Setter Property="Content" Value="{StaticResource FontAwsome-Icon-Globe}" />
-        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+    <Style x:Key="Button-Browse-Build" x:Shared="False" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
+        <Setter Property="Content">
+            <Setter.Value>
+                <fa5:SvgAwesome Icon="Solid_Globe" 
+                                Foreground="{StaticResource Brush-Blue}"
+                                Height="16"/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Margin" Value="8 1" />
-        <Setter Property="FontSize" Value="16" />
     </Style>
 
     <Style x:Key="Button-Close" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
-        <Setter Property="Content" Value="{StaticResource FontAwsome-Icon-Times}" />
-        <Setter Property="Foreground" Value="{StaticResource Brush-Red}" />
+        <Setter Property="Content">
+            <Setter.Value>
+                <fa5:SvgAwesome Icon="Solid_Times" 
+                                Foreground="{StaticResource Brush-Red}"
+                                Height="16"/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Margin" Value="4 1" />
         <Setter Property="Padding" Value="4" />
-        <Setter Property="FontSize" Value="16" />
     </Style>
 
     <Style x:Key="Button-Copy" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
-        <Setter Property="Content" Value="{StaticResource FontAwsome-Icon-Copy}" />
-        <Setter Property="Foreground" Value="{StaticResource Brush-Red}" />
+        <Setter Property="Content">
+            <Setter.Value>
+                <fa5:SvgAwesome Icon="Solid_Copy" 
+                                Foreground="{StaticResource Brush-Red}"
+                                Height="16"/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Margin" Value="4 1" />
         <Setter Property="Padding" Value="4" />
-        <Setter Property="FontSize" Value="16" />
     </Style>
 
     <Style x:Key="Button-Settings" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
-        <Setter Property="Content" Value="{StaticResource FontAwsome-Icon-Cog}" />
-        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Content">
+            <Setter.Value>
+                <fa5:SvgAwesome Icon="Solid_Cog" 
+                                Foreground="{StaticResource Brush-Blue}"
+                                Height="18"/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Margin" Value="4" />
         <Setter Property="Padding" Value="4" />
-        <Setter Property="FontSize" Value="18" />
     </Style>
 
     <Style x:Key="Window-Button-Menu" TargetType="Button">
@@ -135,9 +160,7 @@
     </Style>
 
     <Style x:Key="Window-Button" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
-        <Setter Property="Foreground" Value="White" />
         <Setter Property="Padding" Value="2" />
-        <Setter Property="FontSize" Value="14" />
         <Setter Property="Width" Value="40" />
         <Style.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
@@ -159,9 +182,7 @@
     </Style>
 
     <Style x:Key="Window-Button-Red" BasedOn="{StaticResource Button-Sizing}" TargetType="Button">
-        <Setter Property="Foreground" Value="White" />
         <Setter Property="Padding" Value="2" />
-        <Setter Property="FontSize" Value="14" />
         <Setter Property="Width" Value="40" />
         <Style.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
@@ -197,17 +218,17 @@
                             CornerRadius="4">
                         <StackPanel Orientation="Horizontal">
                             <ContentPresenter VerticalAlignment="Center" Margin="0 0 8 0" />
-                            <TextBlock
-                                Style="{Binding Path=(attachedProperties:ButtonImage.ImageStyle), RelativeSource={RelativeSource TemplatedParent}}"
-                                FontSize="16"
-                                VerticalAlignment="Center" />
+
+                            <fa5:SvgAwesome Icon="{Binding Path=(attachedProperties:ButtonImage.Icon), RelativeSource={RelativeSource TemplatedParent}}" 
+                                            Height="16" 
+                                            VerticalAlignment="Center"
+                                            Foreground="{Binding Path=(attachedProperties:ButtonImage.IconBrush), RelativeSource={RelativeSource TemplatedParent}}"/>
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
-                                <Storyboard
-                                    TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                                <Storyboard TargetProperty="(Button.Background).(SolidColorBrush.Color)">
                                     <ColorAnimation To="#DDDDDD" Duration="0:0:0.3"
                                                     DecelerationRatio="0.5" />
                                 </Storyboard>
@@ -215,8 +236,7 @@
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard>
-                                <Storyboard
-                                    TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                                <Storyboard TargetProperty="(Button.Background).(SolidColorBrush.Color)">
                                     <ColorAnimation To="Transparent" Duration="0:0:0.3"
                                                     DecelerationRatio="0.5" />
                                 </Storyboard>

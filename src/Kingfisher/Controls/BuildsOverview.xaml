@@ -8,6 +8,7 @@
              xmlns:cm="clr-namespace:Kingfisher.Commands"
              xmlns:ioC="clr-namespace:Kingfisher.IoC"
              xmlns:mx="clr-namespace:Kingfisher.MarkupExtensions"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -105,11 +106,10 @@
                                         ClipboardContentBinding="{Binding Status, Converter={StaticResource Converter-ToText-BuildState}}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="vm:BuildViewModel">
-                            <TextBlock Style="{Binding Status, Converter={StaticResource Converter-BuildStateToStyle}}"
-                                       FontSize="16"
+                            <fa5:SvgAwesome Style="{Binding Status, Converter={StaticResource Converter-BuildStateToStyle}}"
+                                       Height="16"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Padding="1"
                                        ToolTip="{Binding Status, Converter={StaticResource Converter-ToText-BuildState}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

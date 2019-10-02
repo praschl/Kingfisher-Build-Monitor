@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fa5="http://schemas.fontawesome.com/icons/">
+
+    <Style x:Key="State-NotStarted" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Icon" Value="Solid_EllipsisH">
+        </Setter>
+    </Style>
+    <Style x:Key="State-Postponed" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Icon" Value="Solid_CalendarAlt" />
+    </Style>
+    <Style x:Key="State-InProgress" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Icon" Value="Solid_Play" />
+    </Style>
+    <Style x:Key="State-Cancelling" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Blue}" />
+        <Setter Property="Icon" Value="Solid_Ban" />
+    </Style>
+
+    <Style x:Key="State-Canceled" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Orange}" />
+        <Setter Property="Icon" Value="Solid_Ban" />
+    </Style>
+    <Style x:Key="State-Succeeded" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Green}" />
+        <Setter Property="Icon" Value="Solid_Check" />
+    </Style>
+    <Style x:Key="State-PartiallySucceeded" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Orange}" />
+        <Setter Property="Icon" Value="Solid_ExclamationTriangle" />
+    </Style>
+    <Style x:Key="State-Failed" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Red}" />
+        <Setter Property="Icon" Value="Solid_Times" />
+    </Style>
+    <Style x:Key="State-Unknown" TargetType="fa5:SvgAwesome">
+        <Setter Property="Foreground" Value="{StaticResource Brush-Magenta}" />
+        <Setter Property="Icon" Value="Solid_QuestionCircle" />
+    </Style>
+
+</ResourceDictionary>

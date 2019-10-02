@@ -22,6 +22,9 @@ namespace Kingfisher.WpfViewModels
                 throw new InvalidOperationException("MainWindowViewModel cannot be instantiated more than once.");
             Instance = this;
 
+            if (window == null) // when used from designer instance
+                return;
+
             _window = window;
             _window.SizeChanged += delegate
             {
@@ -67,6 +70,14 @@ namespace Kingfisher.WpfViewModels
         public double ShadowWidth { get; set; } = 10;
 
         public Thickness BorderThickness { get; set; } = new Thickness(1, 30, 1, 1);
+
+        public bool TopMost { get; set; } =
+#if DEBUG
+            true
+#else
+            false
+#endif
+            ;
 
         public static Point GetMenuPosition()
         {
