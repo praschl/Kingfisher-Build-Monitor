@@ -13,6 +13,7 @@
     </Style>
 
     <Style x:Key="Button-Sizing" TargetType="Button">
+        <Setter Property="SnapsToDevicePixels" Value="False" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Template">
@@ -135,7 +136,6 @@
                                 Height="18"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="Margin" Value="4" />
         <Setter Property="Padding" Value="4" />
     </Style>
 

@@ -30,6 +30,7 @@
                 <!-- Settings button -->
                 <Button DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center"
                         Style="{StaticResource Button-Settings}"
+                        Margin="0 4 4 4"
                         Command="{ioC:Resolve ServiceType=cm:OpenSettingsCommand}" />
 
                 <!-- Search Text -->
