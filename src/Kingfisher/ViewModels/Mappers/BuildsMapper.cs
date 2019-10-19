@@ -33,10 +33,10 @@ namespace Kingfisher.ViewModels.Mappers
             buildVm.Id = build.Id;
             buildVm.Project = build.Project.Name;
             buildVm.Definition = build.Definition.Name;
-            buildVm.RequestedBy = build.RequestedBy.DisplayName;
-            buildVm.RequestedFor = build.RequestedFor.DisplayName;
-            buildVm.RequestedByShort = build.RequestedBy.UniqueName;
-            buildVm.RequestedForShort = build.RequestedFor.UniqueName;
+            buildVm.RequestedBy = build.RequestedBy?.DisplayName;
+            buildVm.RequestedFor = build.RequestedFor?.DisplayName;
+            buildVm.RequestedByShort = build.RequestedBy?.UniqueName;
+            buildVm.RequestedForShort = build.RequestedFor?.UniqueName;
             buildVm.QueuedDateTime = build.QueueTime.ToLocalTime().DateTime;
             buildVm.StartedDateTime = build.StartTime?.ToLocalTime().DateTime;
             buildVm.FinishedDateTime = build.FinishTime?.ToLocalTime().DateTime;
