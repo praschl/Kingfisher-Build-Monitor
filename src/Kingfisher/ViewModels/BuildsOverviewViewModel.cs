@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -26,12 +26,16 @@ namespace Kingfisher.ViewModels
         private readonly DispatcherTimer _refreshTimePropertiesTimer = new DispatcherTimer();
         private readonly DevOpsServerConfig _serverConfig;
 
+        private DateTimeOffset _lastRefresh;
+
         public BuildsOverviewViewModel(IBuildsProvider buildsProvider, IProjectMapper projectMapper, IBuildsMapper buildsMapper, IConfigManager configManager)
         {
             _buildsProvider = buildsProvider;
             _projectMapper = projectMapper;
             _buildsMapper = buildsMapper;
             _configManager = configManager;
+
+            _lastRefresh = DateTimeOffset.Now - _serverConfig.AgeOfBuilds;
 
             _serverConfig = _configManager.Get<DevOpsServerConfig>();
 
@@ -155,6 +159,10 @@ namespace Kingfisher.ViewModels
                 await RefreshProjectsAsync().ConfigureAwait(false);
                 await RefreshBuildsAsync().ConfigureAwait(false);
             }
+            catch (TaskCanceledException ex)
+            {
+                Debug.WriteLine(ex); // ignore this one
+            }
             catch (Exception ex)
             {
                 Exception = ex;
@@ -170,22 +178,22 @@ namespace Kingfisher.ViewModels
             var projects = await _buildsProvider.GetProjectsAsync();
             _projectMapper.Map(projects, Projects);
         }
-
+        
         private async Task RefreshBuildsAsync()
         {
             var projects = Projects.Select(p => p.Name).ToArray();
 
             var since = Builds.Count == 0
-                    ? DateTimeOffset.Now -_serverConfig.AgeOfBuilds
-                    // now - refreshtime - 5 secs to allow for some overlapping
-                    : DateTimeOffset.Now - _serverConfig.BuildRefreshTime.Add(TimeSpan.FromSeconds(5))
-                ;
+                ? DateTimeOffset.Now - _serverConfig.AgeOfBuilds
+                : _lastRefresh;
 
             var finishedBuilds = _buildsProvider.GetFinishedBuildsAsync(projects, since);
             var openBuilds = _buildsProvider.GetOpenBuildsAsync(projects);
 
             _buildsMapper.Map(await openBuilds, Builds);
             _buildsMapper.Map(await finishedBuilds, Builds);
+
+            _lastRefresh = DateTime.Now.AddSeconds(-5); // allow some overlapping
         }
 
         public class Designer : BuildsOverviewViewModel
