@@ -35,9 +35,8 @@ namespace Kingfisher.ViewModels
             _buildsMapper = buildsMapper;
             _configManager = configManager;
 
-            _lastRefresh = DateTimeOffset.Now - _serverConfig.AgeOfBuilds;
-
             _serverConfig = _configManager.Get<DevOpsServerConfig>();
+            _lastRefresh = DateTimeOffset.Now - _serverConfig.AgeOfBuilds;
 
             BindingOperations.EnableCollectionSynchronization(Projects, _projectsLock);
             BindingOperations.EnableCollectionSynchronization(Builds, _buildLock);
